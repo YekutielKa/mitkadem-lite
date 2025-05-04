@@ -1,12 +1,14 @@
-import { useTranslation } from 'react-i18next';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Leads() {
-  const { t } = useTranslation();
-
   return (
-    <div>
-      <h1 className="text-2xl font-semibold text-blue-600">{t('leadsTitle', 'Your Leads')}</h1>
-      <p className="mt-2 text-gray-600">{t('leadsDescription', 'List of incoming client requests will appear here.')}</p>
+    <div className="max-w-md mx-auto space-y-4 p-4">
+      <Label htmlFor="name">Имя клиента</Label>
+      <Input id="name" placeholder="Введите имя" />
+
+      <Label htmlFor="email">Email</Label>
+      <Input id="email" type="email" placeholder="Введите email" />
     </div>
   );
 }

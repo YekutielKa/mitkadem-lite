@@ -1,46 +1,41 @@
-import { Routes, Route, Navigate, useParams, Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Layout from './layouts/Layout';
 import Home from './pages/Home';
-import About from './pages/About';
-import Leads from './pages/Leads'; // ⬅️ Добавим эту страницу
+import Leads from './pages/Leads';
+import Posts from './pages/Posts';
+import Layout from './components/Layout';
 
-const LANGUAGES = ['en', 'ru', 'he', 'fr', 'es'];
+const languages = ['ru', 'en', 'he', 'fr', 'es'];
 
-function detectUserLanguage(): string {
-  const browserLang = navigator.language.split('-')[0];
-  return LANGUAGES.includes(browserLang) ? browserLang : 'en';
-}
+function App() {
+  const { i18n, t } = useTranslation();
 
-function LanguageWrapper() {
-  const { i18n } = useTranslation();
-  const { lang } = useParams();
-
-  useEffect(() => {
-    if (lang && LANGUAGES.includes(lang)) {
-      i18n.changeLanguage(lang);
-    }
-  }, [lang, i18n]);
+  const changeLanguage = () => {
+    const currentIndex = languages.indexOf(i18n.language);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    i18n.changeLanguage(languages[nextIndex]);
+  };
 
   return (
-    <Layout>
-      <Outlet />
-    </Layout>
+    <BrowserRouter>
+      <div className="relative">
+        <button
+          onClick={changeLanguage}
+          className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded z-50"
+        >
+          {t('change_lang')}
+        </button>
+
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/leads" element={<Leads />} />
+            <Route path="/posts" element={<Posts />} />
+          </Routes>
+        </Layout>
+      </div>
+    </BrowserRouter>
   );
 }
 
-export default function App() {
-  const userLang = detectUserLanguage();
-
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to={`/${userLang}`} replace />} />
-      <Route path=":lang" element={<LanguageWrapper />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="leads" element={<Leads />} />
-      </Route>
-    </Routes>
-  );
-}
+export default App;
