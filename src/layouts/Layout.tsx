@@ -1,56 +1,44 @@
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-
-const LANGUAGES = ['en', 'ru', 'he', 'fr', 'es'];
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 interface Props {
   children: ReactNode;
 }
 
 export default function Layout({ children }: Props) {
-  const { i18n } = useTranslation();
-  const { lang } = useParams();
+  const { i18n, t, ready } = useTranslation();
   const isRtl = i18n.language === 'he';
 
+  if(!ready) return null;
+
   return (
-    <div dir={isRtl ? 'rtl' : 'ltr'} className="min-h-screen bg-gray-100 text-gray-800">
+    <div dir={isRtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col bg-gray-100 text-gray-800">
       <header className="bg-white shadow p-4 flex items-center justify-between">
-        <Link to={`/${lang}`}>
+        <Link to="/">
           <img src={logo} alt="Mitkadem Logo" className="w-10 h-10" />
         </Link>
 
         <nav className="flex gap-4 text-sm">
-          <Link to={`/${lang}`} className="hover:underline">
-            Home
+          <Link to="/" className="hover:underline">
+            {t('nav.home')}
           </Link>
-          <Link to={`/${lang}/about`} className="hover:underline">
-            About
+          <Link to="/posts" className="hover:underline">
+            {t('nav.posts')}
           </Link>
-          <Link to={`/${lang}/leads`} className="hover:underline">
-            Leads
+          <Link to="/leads" className="hover:underline">
+            {t('nav.leads')}
           </Link>
         </nav>
 
-        <div className="flex gap-2">
-          {LANGUAGES.map((lng) => (
-            <Link
-              key={lng}
-              to={`/${lng}`}
-              className={`px-2 py-1 text-sm border rounded ${
-                i18n.language === lng
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-blue-600 border-blue-600'
-              }`}
-            >
-              {lng.toUpperCase()}
-            </Link>
-          ))}
-        </div>
+        <LanguageSwitcher />
       </header>
 
-      <main className="p-6">{children}</main>
+      <main className="p-6 flex-1">
+        {children}
+      </main>
     </div>
   );
 }

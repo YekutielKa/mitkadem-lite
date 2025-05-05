@@ -21,7 +21,7 @@ import {
     const changeLanguage = (code: string) => {
       i18n.changeLanguage(code);
     };
-  
+
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

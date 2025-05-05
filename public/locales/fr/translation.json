@@ -1,0 +1,10 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "leads": "Demandes",
+    "posts": "Articles"
+
+  },
+  "change_lang": "Changer de langue"
+}

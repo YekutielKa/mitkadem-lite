@@ -1,27 +1,24 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import en from './locales/en.json';
-import ru from './locales/ru.json';
-import he from './locales/he.json';
-import fr from './locales/fr.json';
-import es from './locales/es.json';
-
 i18n
+  .use(HttpApi)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {
-      en: { translation: en },
-      ru: { translation: ru },
-      he: { translation: he },
-      fr: { translation: fr },
-      es: { translation: es },
-    },
-    fallbackLng: 'en',
+    fallbackLng: 'ru',
+    supportedLngs: ['ru', 'en', 'he', 'fr', 'es'],
     interpolation: {
       escapeValue: false,
+    },
+    backend: {
+      loadPath: '/locales/{{lng}}/translation.json', // ✅ путь к public
+    },
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
     },
   });
 

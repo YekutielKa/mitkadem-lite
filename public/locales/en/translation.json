@@ -1,0 +1,10 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "leads": "Leads",
+    "posts": "Posts"
+
+  },
+  "change_lang": "Change language"
+}
