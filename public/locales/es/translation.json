@@ -1,10 +1,11 @@
 {
+  "aboutDescription": "More info will be here.",
+  "aboutTitle": "About Mitkadem",
+  "change_lang": "Cambiar idioma",
   "nav": {
     "home": "Inicio",
-    "about": "Acerca de",
     "leads": "Solicitudes",
     "posts": "Publicaciones"
-
   },
-  "change_lang": "Cambiar idioma"
+  "welcome": ""
 }
