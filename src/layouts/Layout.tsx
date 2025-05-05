@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 import logo from '../assets/logo.png';
@@ -12,6 +12,13 @@ interface Props {
 export default function Layout({ children }: Props) {
   const { i18n } = useTranslation();
   const { lang } = useParams();
+
+  useEffect(() => {
+    if (lang && i18n.language !== lang) {
+      i18n.changeLanguage(lang);
+    }
+  }, [lang, i18n]);
+
   const isRtl = i18n.language === 'he';
 
   return (
