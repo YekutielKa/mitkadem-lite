@@ -7,5 +7,28 @@
     "leads": "Leads",
     "posts": "Posts"
   },
-  "welcome": ""
+  "welcome": "",
+  "homepage": {
+    "title": "Grow Your Business with AI",
+    "subtitle": "AI-powered marketing that brings clients to you. Easy. Automated. Multilingual.",
+    "cta": "Start for Free",
+    "note": "No credit card required"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back, Alex",
+    "cta": "Start Campaign",
+    "metrics": {
+      "engagement": "Engagement Rate",
+      "conversion": "Conversion Rate",
+      "leads": "New Leads"
+    }
+  },
+  "posts": {
+    "title": "Marketing Posts",
+    "description": "Manage your automated content campaigns and posts.",
+    "create": "Create Post",
+    "filters_placeholder": "Filters will be here soon...",
+    "empty": "No posts yet. Start by creating your first one."
+  }
 }
